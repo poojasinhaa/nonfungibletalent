@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non Fungible Talent</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">non fungible talent</div>
+            <div class="nav-tabs">
+                <button class="tab-button active" data-tab="create">create</button>
+                <button class="tab-button" data-tab="consume">consume</button>
+                <button class="tab-button" data-tab="about">about</button>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="tab-content">
+                <div id="create" class="content-section active">
+                    <div class="section-title">things i build</div>
+                    <div class="project-grid">
+                        <div class="project-item" data-description="latest">
+                            <a href="https://ascii-image-generator.netlify.app/" target="_blank">ascii portrait generator</a>
+                        </div>
+                        <div class="project-item" data-description="game">
+                            <a href="https://whats-the-match.figma.site/" target="_blank">what's the match</a>
+                        </div>
+                        <div class="project-item" data-description="design community">
+                            <a href="https://afterofficehq.com/" target="_blank">after office hours</a>
+                        </div>
+                        <div class="project-item" data-description="cat club">
+                            <a href="https://chat.whatsapp.com/DvgXQSSiRVhAsSxFHTnYTS" target="_blank">cool cattos club</a>
+                        </div>
+                        <div class="project-item" data-description="grammarly for speech">
+                            <a href="https://www.linkedin.com/company/april-ai/" target="_blank">april ai</a>
+                        </div>
+                        <div class="project-item" data-description="more">
+                            <a href="#" target="_blank">coming soon</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="consume" class="content-section">
+                    <div class="section-title">things i consume</div>
+                    <div class="project-grid">
+                        <div class="project-item">essential programming books</div>
+                        <div class="project-item">technical blog posts</div>
+                        <div class="project-item">podcast episodes</div>
+                        <div class="project-item">online courses</div>
+                        <div class="project-item">research papers</div>
+                        <div class="project-item">documentation</div>
+                        <div class="project-item">conference talks</div>
+                        <div class="project-item">tutorial videos</div>
+                    </div>
+                </div>
+                
+                <div id="about" class="content-section">
+                    <div class="section-title">things i live for</div>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>passionate about creating meaningful digital experiences and exploring the intersection of technology and creativity.</p>
+                            <p>constantly learning, building, and sharing knowledge with the community.</p>
+                            <p>focused on solving real-world problems through innovative solutions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-text">last login: sun oct 19, 03:06:15</div>
+            <div class="footer-text">macintosh; intel mac os x 10_15_7</div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const contentSections = document.querySelectorAll('.content-section');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all buttons and sections
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    contentSections.forEach(section => section.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding section
+                    this.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

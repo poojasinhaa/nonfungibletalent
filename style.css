@@ -138,83 +138,92 @@ body.theme-about {
 }
 
 .section-title {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 400;
     color: var(--fg);
-    margin-bottom: 24px;
-    text-align: center;
-    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-align: left;
+    letter-spacing: 0.5px;
 }
 
 .project-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0;
-    margin-top: 20px;
+    margin-top: 0;
     border-top: 1px solid var(--fg);
     border-bottom: 1px solid var(--fg);
 }
 
-.project-grid.project-list {
-    grid-template-columns: 1fr;
-}
-
-.project-grid.project-list .project-item {
-    border-right: none;
-}
-
-/* Consume page list style: label on left, value/right-aligned link on right with rule lines */
-.consume-list .project-item {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 24px;
-    padding: 20px 0;
-}
-
-.consume-list .project-item .project-subheader {
-    /* acts like the left label */
-    letter-spacing: 2px;
-    align-self: center;
-    font-size: 14px;
-}
-
-.consume-list .project-item a {
-    justify-self: end;
-    align-self: center;
-}
-
-.consume-list .project-item::after {
-    /* remove arrow for this list style */
-    content: "";
-}
-
-.consume-list .project-item {
-    border-bottom: 1px solid var(--fg);
-}
-
-/* Reduce hover effect on consume list to avoid block highlight */
-.consume-list .project-item:hover {
-    background-color: transparent;
+.consume-title {
+    font-size: 16px;
+    font-weight: 400;
     color: var(--fg);
+    margin-bottom: 20px;
+    text-align: left;
+    letter-spacing: 0.5px;
+    font-family: 'IBM Plex Mono', monospace;
 }
 
-/* Container padding to align content and rules nicely */
-.consume-list {
-    padding: 0 24px;
+.consume-items {
+    border-top: 1px solid var(--fg);
+    border-bottom: 1px solid var(--fg);
+    margin-bottom: 20px;
+}
+
+.consume-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--fg);
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.consume-item:last-child {
+    border-bottom: none;
+}
+
+.item-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--fg);
+    letter-spacing: 0.5px;
+}
+
+.item-date {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--fg);
+    letter-spacing: 0.5px;
+    opacity: 0.6;
+}
+
+.consume-ps {
+    margin-top: 0;
+}
+
+.consume-ps p {
+    font-size: 14px;
+    color: var(--fg);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    font-family: 'IBM Plex Mono', monospace;
 }
 
 .project-item {
     font-size: 16px;
     color: var(--fg);
-    padding: 22px;
+    padding: 20px;
     background-color: transparent;
     border-right: 1px solid var(--fg);
     border-bottom: 1px solid var(--fg);
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: 0.5px;
     position: relative;
 }
@@ -274,7 +283,7 @@ body.theme-about {
 }
 
 .about-content {
-    margin-top: 20px;
+    margin-top: 0;
 }
 
 .about-text {

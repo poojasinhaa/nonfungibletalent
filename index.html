@@ -6,7 +6,7 @@
     <title>Non Fungible Talent</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="theme-create">
     <div class="container">
         <div class="header">
             <div class="logo">non fungible talent</div>
@@ -45,7 +45,23 @@
                 
                 <div id="consume" class="content-section">
                     <div class="section-title">things i consume</div>
-                    <div class="project-grid">
+                    <div class="project-grid project-list consume-list">
+                        <div class="project-item with-subheader">
+                            <div class="project-subheader">Oct read / current</div>
+                            <a href="https://press.stripe.com/the-making-of-prince-of-persia" target="_blank">The Making of Prince of Persia</a>
+                        </div>
+                        <div class="project-item with-subheader">
+                            <div class="project-subheader">Sept 2025</div>
+                            <a href="https://www.alexwest.co/book-one" target="_blank">How I made $1M from my personal projects</a>
+                        </div>
+                        <div class="project-item with-subheader">
+                            <div class="project-subheader">Aug 2025</div>
+                            <a href="https://en.wikipedia.org/wiki/Kafka_on_the_Shore" target="_blank">Kafka on the Shore</a>
+                        </div>
+                        <div class="project-item with-subheader">
+                            <div class="project-subheader">ongoing</div>
+                            <a href="https://morfene.com/021.pdf" target="_blank">Zero to One</a>
+                        </div>
                         <div class="project-item">essential programming books</div>
                         <div class="project-item">technical blog posts</div>
                         <div class="project-item">podcast episodes</div>
@@ -71,8 +87,11 @@
         </div>
         
         <div class="footer">
-            <div class="footer-text">last login: sun oct 19, 03:06:15</div>
-            <div class="footer-text">macintosh; intel mac os x 10_15_7</div>
+            <div class="footer-text">last login: <span id="lastLogin">…</span></div>
+            <div class="footer-stats" id="footer-stats" aria-live="polite">
+                <div class="footer-stat-item" id="footer-total">404s served: <span id="totalErrors">…</span></div>
+                <div class="footer-stat-item" id="footer-today">today: <span id="todayErrors">…</span></div>
+            </div>
         </div>
     </div>
     
@@ -92,8 +111,84 @@
                     // Add active class to clicked button and corresponding section
                     this.classList.add('active');
                     document.getElementById(targetTab).classList.add('active');
+
+                    // Theme switch based on tab
+                    const bodyEl = document.body;
+                    bodyEl.classList.remove('theme-create', 'theme-consume', 'theme-about');
+                    if (targetTab === 'create') bodyEl.classList.add('theme-create');
+                    if (targetTab === 'consume') bodyEl.classList.add('theme-consume');
+                    if (targetTab === 'about') bodyEl.classList.add('theme-about');
                 });
             });
+
+            // Footer stats: attempt to fetch from backend; fallback to local storage
+            const totalEl = document.getElementById('totalErrors');
+            const todayEl = document.getElementById('todayErrors');
+
+            function getTodayKey() {
+                const now = new Date();
+                const y = now.getUTCFullYear();
+                const m = String(now.getUTCMonth() + 1).padStart(2, '0');
+                const d = String(now.getUTCDate()).padStart(2, '0');
+                return `nft-404-day-${y}-${m}-${d}`;
+            }
+
+            function seedIfNeeded() {
+                if (!localStorage.getItem('nft-404-total')) {
+                    localStorage.setItem('nft-404-total', '42');
+                }
+                const dayKey = getTodayKey();
+                if (!localStorage.getItem(dayKey)) {
+                    localStorage.setItem(dayKey, '0');
+                }
+            }
+
+            async function fetchFooterStats() {
+                try {
+                    const res = await fetch('/api/404-stats', { method: 'GET' });
+                    if (!res.ok) throw new Error('bad status');
+                    const data = await res.json();
+                    totalEl.textContent = data.total ?? '???';
+                    todayEl.textContent = data.today ?? '???';
+                } catch (e) {
+                    // Fallback to local storage
+                    seedIfNeeded();
+                    const total = localStorage.getItem('nft-404-total');
+                    const today = localStorage.getItem(getTodayKey());
+                    totalEl.textContent = total || '???';
+                    todayEl.textContent = today || '???';
+                }
+            }
+
+            fetchFooterStats();
+
+            // Last login: show previous visit if available; then store now
+            const lastLoginEl = document.getElementById('lastLogin');
+            function formatLoginDate(ts) {
+                const date = new Date(ts);
+                const dows = ['sun','mon','tue','wed','thu','fri','sat'];
+                const mons = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+                const dow = dows[date.getDay()];
+                const mon = mons[date.getMonth()];
+                const day = String(date.getDate()).padStart(2, '0');
+                const hh = String(date.getHours()).padStart(2, '0');
+                const mm = String(date.getMinutes()).padStart(2, '0');
+                const ss = String(date.getSeconds()).padStart(2, '0');
+                return `${dow} ${mon} ${day}, ${hh}:${mm}:${ss}`;
+            }
+            try {
+                const prevTs = localStorage.getItem('nft-last-login');
+                const nowTs = Date.now();
+                if (prevTs) {
+                    lastLoginEl.textContent = formatLoginDate(Number(prevTs));
+                } else {
+                    lastLoginEl.textContent = formatLoginDate(nowTs);
+                }
+                localStorage.setItem('nft-last-login', String(nowTs));
+            } catch (e) {
+                // If storage fails, at least show current time
+                lastLoginEl.textContent = formatLoginDate(Date.now());
+            }
         });
     </script>
 </body>

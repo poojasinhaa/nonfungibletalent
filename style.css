@@ -1,3 +1,10 @@
+:root {
+    --bg: #faf8f5;
+    /* create page background */
+    --fg: #2563eb;
+    /* create page text/border */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,14 +13,34 @@
 
 body {
     font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
-    background-color: #faf8f5;
-    color: #2563eb;
+    background-color: var(--bg);
+    color: var(--fg);
     line-height: 1.4;
     font-size: 14px;
     min-height: 100vh;
     font-weight: 400;
     letter-spacing: 0.5px;
     text-transform: lowercase;
+}
+
+/* Themes per page */
+body.theme-create {
+    --bg: #faf8f5;
+    --fg: #2563eb;
+}
+
+body.theme-consume {
+    --bg: #fde8d5;
+    /* light peach */
+    --fg: #6b3b3b;
+    /* maroon */
+}
+
+body.theme-about {
+    --bg: #FFF9C8;
+    /* about page background */
+    --fg: #3e6b3f;
+    /* deep green */
 }
 
 .container {
@@ -29,20 +56,20 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
     padding-bottom: 20px;
 }
 
 .logo {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
-    color: #2563eb;
+    color: var(--fg);
     letter-spacing: 2px;
 }
 
 .nav-tabs {
     display: flex;
-    gap: 0;
+    gap: 32px;
 }
 
 .tab-button {
@@ -52,21 +79,22 @@ body {
     font-family: inherit;
     font-size: 14px;
     font-weight: 500;
-    color: #2563eb;
+    color: var(--fg);
     cursor: pointer;
     transition: all 0.3s ease;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     border-bottom: 2px solid transparent;
     opacity: 0.6;
 }
 
 .tab-button:hover {
-    opacity: 1;
+    opacity: 0.85;
 }
 
 .tab-button.active {
     opacity: 1;
-    border-bottom: 2px solid #2563eb;
+    border-bottom: 2px solid var(--fg);
+    padding-bottom: 6px;
 }
 
 .main-content {
@@ -92,8 +120,8 @@ body {
 .section-title {
     font-size: 18px;
     font-weight: 600;
-    color: #2563eb;
-    margin-bottom: 40px;
+    color: var(--fg);
+    margin-bottom: 24px;
     text-align: center;
     letter-spacing: 2px;
 }
@@ -103,17 +131,65 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 0;
     margin-top: 20px;
-    border-top: 1px solid #2563eb;
-    border-bottom: 1px solid #2563eb;
+    border-top: 1px solid var(--fg);
+    border-bottom: 1px solid var(--fg);
+}
+
+.project-grid.project-list {
+    grid-template-columns: 1fr;
+}
+
+.project-grid.project-list .project-item {
+    border-right: none;
+}
+
+/* Consume page list style: label on left, value/right-aligned link on right with rule lines */
+.consume-list .project-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+}
+
+.consume-list .project-item .project-subheader {
+    /* acts like the left label */
+    letter-spacing: 1px;
+    align-self: center;
+}
+
+.consume-list .project-item a {
+    justify-self: end;
+    align-self: center;
+}
+
+.consume-list .project-item::after {
+    /* remove arrow for this list style */
+    content: "";
+}
+
+.consume-list .project-item {
+    border-bottom: 1px solid var(--fg);
+}
+
+/* Reduce hover effect on consume list to avoid block highlight */
+.consume-list .project-item:hover {
+    background-color: transparent;
+    color: var(--fg);
+}
+
+/* Container padding to align content and rules nicely */
+.consume-list {
+    padding: 0 24px;
 }
 
 .project-item {
     font-size: 16px;
-    color: #2563eb;
-    padding: 30px;
+    color: var(--fg);
+    padding: 22px;
     background-color: transparent;
-    border-right: 1px solid #2563eb;
-    border-bottom: 1px solid #2563eb;
+    border-right: 1px solid var(--fg);
+    border-bottom: 1px solid var(--fg);
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
@@ -139,12 +215,26 @@ body {
 }
 
 .project-item:hover {
-    background-color: #2563eb;
-    color: #faf8f5;
+    background-color: var(--fg);
+    color: var(--bg);
 }
 
 .project-item::before {
     content: attr(data-description);
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+/* When explicit subheader element is present, hide the pseudo subheader */
+.project-item.with-subheader::before {
+    content: "";
+    margin-bottom: 0;
+}
+
+.project-subheader {
     display: block;
     font-size: 12px;
     font-weight: 400;
@@ -174,7 +264,7 @@ body {
 
 .about-text p {
     font-size: 16px;
-    color: #2563eb;
+    color: var(--fg);
     margin-bottom: 20px;
     line-height: 1.6;
     font-weight: 400;
@@ -190,9 +280,22 @@ body {
 
 .footer-text {
     font-size: 12px;
-    color: #2563eb;
+    color: var(--fg);
     font-weight: 400;
     opacity: 0.6;
+}
+
+.footer-stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.footer-stat-item {
+    font-size: 12px;
+    color: var(--fg);
+    opacity: 0.9;
 }
 
 @media (max-width: 768px) {
@@ -223,7 +326,7 @@ body {
         padding: 20px;
         font-size: 14px;
         border-right: none;
-        border-bottom: 1px solid #2563eb;
+        border-bottom: 1px solid var(--fg);
     }
 
     .project-item:last-child {

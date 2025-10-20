@@ -75,6 +75,18 @@ body.theme-about {
     letter-spacing: 2px;
 }
 
+.logo svg text {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 3s ease-in-out forwards;
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
 .nav-tabs {
     display: flex;
     gap: 32px;

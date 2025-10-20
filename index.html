@@ -13,14 +13,11 @@
     <div class="container">
         <div class="header">
             <div class="logo">
-                <svg width="120" height="40" viewBox="0 0 120 40">
-                    <text x="0" y="30" font-family="IBM Plex Mono" font-size="28" font-weight="700" fill="none" stroke="currentColor" stroke-width="1" letter-spacing="2px">nft</text>
-                </svg>
+                <a href="#" onclick="switchToTab('home'); return false;">non fungible talent</a>
             </div>
             <div class="nav-tabs">
-                <button class="tab-button active" data-tab="home">home</button>
                 <button class="tab-button" data-tab="create">create</button>
-                <button class="tab-button" data-tab="consume">consume</button>
+                <button class="tab-button active" data-tab="consume">consume</button>
             </div>
         </div>
         
@@ -110,24 +107,29 @@
             const tabButtons = document.querySelectorAll('.tab-button');
             const contentSections = document.querySelectorAll('.content-section');
             
+            // Function to switch tabs (used by logo click)
+            window.switchToTab = function(targetTab) {
+                // Remove active class from all buttons and sections
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                contentSections.forEach(section => section.classList.remove('active'));
+                
+                // Add active class to target button and section
+                const targetButton = document.querySelector(`[data-tab="${targetTab}"]`);
+                if (targetButton) targetButton.classList.add('active');
+                document.getElementById(targetTab).classList.add('active');
+
+                // Theme switch based on tab
+                const bodyEl = document.body;
+                bodyEl.classList.remove('theme-home', 'theme-create', 'theme-consume');
+                if (targetTab === 'home') bodyEl.classList.add('theme-home');
+                if (targetTab === 'create') bodyEl.classList.add('theme-create');
+                if (targetTab === 'consume') bodyEl.classList.add('theme-consume');
+            };
+
             tabButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const targetTab = this.getAttribute('data-tab');
-                    
-                    // Remove active class from all buttons and sections
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    contentSections.forEach(section => section.classList.remove('active'));
-                    
-                    // Add active class to clicked button and corresponding section
-                    this.classList.add('active');
-                    document.getElementById(targetTab).classList.add('active');
-
-                    // Theme switch based on tab
-                    const bodyEl = document.body;
-                    bodyEl.classList.remove('theme-home', 'theme-create', 'theme-consume');
-                    if (targetTab === 'home') bodyEl.classList.add('theme-home');
-                    if (targetTab === 'create') bodyEl.classList.add('theme-create');
-                    if (targetTab === 'consume') bodyEl.classList.add('theme-consume');
+                    switchToTab(targetTab);
                 });
             });
 

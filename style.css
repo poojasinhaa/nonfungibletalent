@@ -12,8 +12,11 @@
 }
 
 body {
-    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
+    font-family: 'IBM Plex Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
     background-color: var(--bg);
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--fg) 8%, transparent) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: 0 0;
     color: var(--fg);
     line-height: 1.4;
     font-size: 14px;
@@ -24,6 +27,11 @@ body {
 }
 
 /* Themes per page */
+body.theme-home {
+    --bg: #FAF8D5;
+    --fg: #000000;
+}
+
 body.theme-create {
     --bg: #faf8f5;
     --fg: #2563eb;
@@ -148,14 +156,15 @@ body.theme-about {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
-    gap: 12px;
-    padding: 14px 0;
+    gap: 24px;
+    padding: 20px 0;
 }
 
 .consume-list .project-item .project-subheader {
     /* acts like the left label */
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     align-self: center;
+    font-size: 14px;
 }
 
 .consume-list .project-item a {
@@ -259,7 +268,7 @@ body.theme-about {
 .about-text {
     max-width: 600px;
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
 }
 
 .about-text p {

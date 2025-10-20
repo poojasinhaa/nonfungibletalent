@@ -4,22 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Non Fungible Talent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-create">
+<body class="theme-home">
     <div class="container">
         <div class="header">
-            <div class="logo">non fungible talent</div>
+            <div class="logo">nft</div>
             <div class="nav-tabs">
-                <button class="tab-button active" data-tab="create">create</button>
+                <button class="tab-button active" data-tab="home">home</button>
+                <button class="tab-button" data-tab="create">create</button>
                 <button class="tab-button" data-tab="consume">consume</button>
-                <button class="tab-button" data-tab="about">about</button>
             </div>
         </div>
         
         <div class="main-content">
             <div class="tab-content">
-                <div id="create" class="content-section active">
+                <div id="home" class="content-section active">
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>hello,</p>
+                            <p>i am a product designer on a quest to build things. i'm passionate about creating meaningful experiences and exploring the intersection of technology and creativity. my aim for this website is to treat it as my personal playground, and i expect it to get crazier as i make progress on it. a lot of AI has been used to build this platform.</p>
+                            <p>i am constantly learning, building, and sharing knowledge with the community. on the other two tabs, you'll see things i build and consume — two essentials for any creative: the need to keep building and the need to keep learning. this website will hopefully grow into a collection of everything i love and care for.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="create" class="content-section">
                     <div class="section-title">things i build</div>
                     <div class="project-grid">
                         <div class="project-item" data-description="latest">
@@ -73,16 +86,6 @@
                     </div>
                 </div>
                 
-                <div id="about" class="content-section">
-                    <div class="section-title">things i live for</div>
-                    <div class="about-content">
-                        <div class="about-text">
-                            <p>passionate about creating meaningful digital experiences and exploring the intersection of technology and creativity.</p>
-                            <p>constantly learning, building, and sharing knowledge with the community.</p>
-                            <p>focused on solving real-world problems through innovative solutions.</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         
@@ -114,10 +117,10 @@
 
                     // Theme switch based on tab
                     const bodyEl = document.body;
-                    bodyEl.classList.remove('theme-create', 'theme-consume', 'theme-about');
+                    bodyEl.classList.remove('theme-home', 'theme-create', 'theme-consume');
+                    if (targetTab === 'home') bodyEl.classList.add('theme-home');
                     if (targetTab === 'create') bodyEl.classList.add('theme-create');
                     if (targetTab === 'consume') bodyEl.classList.add('theme-consume');
-                    if (targetTab === 'about') bodyEl.classList.add('theme-about');
                 });
             });
 

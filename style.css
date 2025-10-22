@@ -68,6 +68,15 @@ body.theme-about {
     padding-bottom: 20px;
 }
 
+.header-inner {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+}
+
 .logo {
     font-size: 14px;
     font-weight: 400;
@@ -96,6 +105,15 @@ body.theme-about {
 .nav-tabs {
     display: flex;
     gap: 32px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-tab {
+    margin-right: auto;
+    padding-left: 0 !important;
+    padding-right: 0;
 }
 
 .tab-button {
@@ -119,9 +137,7 @@ body.theme-about {
 
 .tab-button.active {
     opacity: 1;
-    font-style: italic;
-    border-bottom: 2px dashed var(--fg);
-    padding-bottom: 6px;
+    font-weight: 600;
 }
 
 .main-content {
@@ -138,6 +154,7 @@ body.theme-about {
 
 .content-section {
     display: none;
+    min-height: 400px;
 }
 
 .content-section.active {
@@ -151,6 +168,22 @@ body.theme-about {
     margin-bottom: 20px;
     text-align: left;
     letter-spacing: 0.5px;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    line-height: 1.4;
+}
+
+.consume-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--fg);
+    margin-bottom: 20px;
+    text-align: left;
+    letter-spacing: 0.5px;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    line-height: 1.4;
 }
 
 .project-grid {
@@ -162,20 +195,11 @@ body.theme-about {
     border-bottom: 1px solid var(--fg);
 }
 
-.consume-title {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--fg);
-    margin-bottom: 20px;
-    text-align: left;
-    letter-spacing: 0.5px;
-    font-family: 'IBM Plex Mono', monospace;
-}
-
 .consume-items {
     border-top: 1px solid var(--fg);
     border-bottom: 1px solid var(--fg);
     margin-bottom: 20px;
+    margin-top: 0;
 }
 
 .consume-item {
@@ -291,12 +315,19 @@ body.theme-about {
 
 .about-content {
     margin-top: 0;
+    padding-top: 0;
 }
 
 .about-text {
     max-width: 600px;
     margin: 0 auto;
     text-align: left;
+    padding-top: 0;
+}
+
+.about-text>*:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 .about-text p {

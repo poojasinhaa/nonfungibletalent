@@ -22,6 +22,11 @@ body.theme-consume {
     --fg: #6b3b3b;
 }
 
+body.theme-changelog {
+    --bg: #e8f4f8;
+    --fg: #1a5f7a;
+}
+
 /* ==========================================
    GLOBAL STYLES
    ========================================== */
@@ -113,6 +118,16 @@ body {
     margin-right: auto;
     padding-left: 0 !important;
     padding-right: 0;
+}
+
+.nav-group {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.nav-group .tab-button {
+    padding: 12px 0;
 }
 
 /* ==========================================
@@ -351,6 +366,84 @@ body {
 }
 
 /* ==========================================
+   CHANGELOG PAGE STYLES
+   ========================================== */
+
+.changelog-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--fg);
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    text-align: left;
+    margin-top: 0 !important;
+    margin-bottom: 20px;
+    padding-top: 0 !important;
+}
+
+.changelog-loading {
+    font-size: 14px;
+    color: var(--fg);
+    opacity: 0.6;
+    font-style: italic;
+}
+
+.changelog-error {
+    font-size: 14px;
+    color: var(--fg);
+}
+
+.changelog-error a {
+    color: var(--fg);
+    text-decoration: underline;
+}
+
+.changelog-list {
+    border-top: 1px solid var(--fg);
+    border-bottom: 1px solid var(--fg);
+    margin-top: 0;
+}
+
+.changelog-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--fg);
+}
+
+.changelog-item:last-child {
+    border-bottom: none;
+}
+
+.changelog-message {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--fg);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.changelog-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.changelog-date {
+    color: var(--fg);
+}
+
+.changelog-sha a {
+    color: var(--fg);
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.changelog-sha a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
    FOOTER
    ========================================== */
 
@@ -470,9 +563,19 @@ body {
         width: 100%;
     }
 
+    .nav-group {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
     .tab-button {
         padding: 8px 16px;
         font-size: 14px;
+    }
+
+    .nav-group .tab-button {
+        padding: 8px 16px;
     }
 
     .logo-tab {
@@ -574,6 +677,26 @@ body {
         line-height: 1.5;
     }
 
+    /* Changelog Page */
+    .changelog-title {
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+    .changelog-item {
+        padding: 14px 0;
+    }
+
+    .changelog-message {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .changelog-meta {
+        font-size: 11px;
+        gap: 12px;
+    }
+
     /* Footer */
     .footer {
         margin-top: 60px;
@@ -643,9 +766,17 @@ body {
         gap: 12px;
     }
 
+    .nav-group {
+        gap: 10px;
+    }
+
     .tab-button {
         padding: 6px 12px;
         font-size: 13px;
+    }
+
+    .nav-group .tab-button {
+        padding: 6px 12px;
     }
 
     .about-text p {

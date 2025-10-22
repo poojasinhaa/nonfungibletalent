@@ -8,18 +8,13 @@
 }
 
 body.theme-home {
-    --bg: #FAF8D5;
-    --fg: #000000;
+    --bg: #e8f4f8;
+    --fg: #1a5f7a;
 }
 
-body.theme-create {
-    --bg: #faf8f5;
-    --fg: #2563eb;
-}
-
-body.theme-consume {
-    --bg: #fde8d5;
-    --fg: #6b3b3b;
+body.theme-create-consume {
+    --bg: #e8f4f8;
+    --fg: #1a5f7a;
 }
 
 body.theme-changelog {
@@ -311,7 +306,7 @@ body {
     letter-spacing: 0.5px;
     line-height: 1.4;
     text-align: left;
-    margin-top: 0 !important;
+    margin-top: 60px !important;
     margin-bottom: 20px;
     padding-top: 0 !important;
 }

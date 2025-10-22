@@ -21,8 +21,7 @@
                 <div class="nav-tabs">
                     <button class="tab-button logo-tab active" data-tab="home" onclick="switchToTab('home')">non fungible talent</button>
                     <div class="nav-group">
-                        <button class="tab-button" data-tab="create">create</button>
-                        <button class="tab-button" data-tab="consume">consume</button>
+                        <button class="tab-button" data-tab="create-consume">create + consume</button>
                         <button class="tab-button" data-tab="changelog">changelog</button>
                     </div>
                 </div>
@@ -55,10 +54,11 @@
                     </div>
                 </div>
                 
-                <!-- Create Tab -->
-                <div id="create" class="content-section">
+                <!-- Create + Consume Tab -->
+                <div id="create-consume" class="content-section">
                     <div class="about-content">
                         <div class="about-text">
+                            <!-- Things I Build Section -->
                             <div class="section-title">things i build</div>
                             <div class="project-grid">
                                 <div class="project-item" data-description="latest">
@@ -80,15 +80,9 @@
                                     <a href="#" target="_blank">coming soon</a>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Consume Tab -->
-                <div id="consume" class="content-section">
-                    <div class="about-content">
-                        <div class="about-text">
-                            <div class="consume-title">things i consume:</div>
+                            
+                            <!-- Things I Consume Section -->
+                            <div class="consume-title">things i consume</div>
                             <div class="consume-items">
                                 <div class="consume-item">
                                     <span class="item-title">the making of prince of persia</span>
@@ -160,7 +154,7 @@
                 if (targetSection) targetSection.classList.add('active');
                 
                 // Switch theme based on active tab
-                document.body.classList.remove('theme-home', 'theme-create', 'theme-consume', 'theme-changelog');
+                document.body.classList.remove('theme-home', 'theme-create-consume', 'theme-changelog');
                 document.body.classList.add(`theme-${targetTab}`);
             };
             
@@ -203,11 +197,12 @@
                         const message = c.commit.message.split('\n')[0]; // First line only
                         const date = new Date(c.commit.author.date);
                         const formattedDate = formatDate(date);
+                        const timestamp = formatTimestamp(date);
                         
                         list += `
                             <li>
                                 <a href="${c.html_url}" target="_blank">${escapeHtml(message)}</a>
-                                <small>by ${escapeHtml(c.commit.author.name)} · ${formattedDate}</small>
+                                <small>by ${escapeHtml(c.commit.author.name)} · ${formattedDate} at ${timestamp}</small>
                             </li>
                         `;
                     });
@@ -244,6 +239,13 @@
                 
                 const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
                 return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+            }
+            
+            // Helper function to format timestamp
+            function formatTimestamp(date) {
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                return `${hours}:${minutes}`;
             }
             
             // Load changelog immediately on page load

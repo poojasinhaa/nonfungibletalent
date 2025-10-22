@@ -4,25 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Non Fungible Talent</title>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="theme-home">
     <div class="container">
+        <!-- Header Navigation -->
         <div class="header">
             <div class="header-inner">
-            <div class="nav-tabs">
-                <button class="tab-button logo-tab active" data-tab="home" onclick="switchToTab('home')">non fungible talent</button>
-                <button class="tab-button" data-tab="create">create</button>
-                <button class="tab-button" data-tab="consume">consume</button>
-            </div>
+                <div class="nav-tabs">
+                    <button class="tab-button logo-tab active" data-tab="home" onclick="switchToTab('home')">non fungible talent</button>
+                    <button class="tab-button" data-tab="create">create</button>
+                    <button class="tab-button" data-tab="consume">consume</button>
+                </div>
             </div>
         </div>
         
+        <!-- Main Content -->
         <div class="main-content">
             <div class="tab-content">
+                <!-- Home Tab -->
                 <div id="home" class="content-section active">
                     <div class="about-content">
                         <div class="about-text">
@@ -43,6 +50,7 @@
                     </div>
                 </div>
                 
+                <!-- Create Tab -->
                 <div id="create" class="content-section">
                     <div class="about-content">
                         <div class="about-text">
@@ -71,6 +79,7 @@
                     </div>
                 </div>
                 
+                <!-- Consume Tab -->
                 <div id="consume" class="content-section">
                     <div class="about-content">
                         <div class="about-text">
@@ -99,10 +108,10 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
         
+        <!-- Footer -->
         <div class="footer">
             <div class="footer-text">last login: <span id="lastLogin">…</span></div>
             <div class="footer-stats" id="footer-stats" aria-live="polite">
@@ -114,48 +123,53 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // ==========================================
+            // TAB SWITCHING
+            // ==========================================
+            
             const tabButtons = document.querySelectorAll('.tab-button');
             const contentSections = document.querySelectorAll('.content-section');
             
-            // Function to switch tabs (used by logo click)
             window.switchToTab = function(targetTab) {
-                // Remove active class from all buttons and sections
+                // Remove active class from all elements
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 contentSections.forEach(section => section.classList.remove('active'));
                 
-                // Add active class to target button and section
+                // Add active class to target elements
                 const targetButton = document.querySelector(`[data-tab="${targetTab}"]`);
                 if (targetButton) targetButton.classList.add('active');
-                document.getElementById(targetTab).classList.add('active');
-
-                // Theme switch based on tab
-                const bodyEl = document.body;
-                bodyEl.classList.remove('theme-home', 'theme-create', 'theme-consume');
-                if (targetTab === 'home') bodyEl.classList.add('theme-home');
-                if (targetTab === 'create') bodyEl.classList.add('theme-create');
-                if (targetTab === 'consume') bodyEl.classList.add('theme-consume');
+                
+                const targetSection = document.getElementById(targetTab);
+                if (targetSection) targetSection.classList.add('active');
+                
+                // Switch theme based on active tab
+                document.body.classList.remove('theme-home', 'theme-create', 'theme-consume');
+                document.body.classList.add(`theme-${targetTab}`);
             };
-
+            
             tabButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const targetTab = this.getAttribute('data-tab');
                     switchToTab(targetTab);
                 });
             });
-
-            // Footer stats: attempt to fetch from backend; fallback to local storage
+            
+            // ==========================================
+            // FOOTER: 404 STATS
+            // ==========================================
+            
             const totalEl = document.getElementById('totalErrors');
             const todayEl = document.getElementById('todayErrors');
-
+            
             function getTodayKey() {
                 const now = new Date();
-                const y = now.getUTCFullYear();
-                const m = String(now.getUTCMonth() + 1).padStart(2, '0');
-                const d = String(now.getUTCDate()).padStart(2, '0');
-                return `nft-404-day-${y}-${m}-${d}`;
+                const year = now.getUTCFullYear();
+                const month = String(now.getUTCMonth() + 1).padStart(2, '0');
+                const day = String(now.getUTCDate()).padStart(2, '0');
+                return `nft-404-day-${year}-${month}-${day}`;
             }
-
-            function seedIfNeeded() {
+            
+            function seedLocalStorageIfNeeded() {
                 if (!localStorage.getItem('nft-404-total')) {
                     localStorage.setItem('nft-404-total', '42');
                 }
@@ -164,51 +178,63 @@
                     localStorage.setItem(dayKey, '0');
                 }
             }
-
+            
             async function fetchFooterStats() {
                 try {
-                    const res = await fetch('/api/404-stats', { method: 'GET' });
-                    if (!res.ok) throw new Error('bad status');
-                    const data = await res.json();
+                    // Attempt to fetch from backend API
+                    const response = await fetch('/api/404-stats', { method: 'GET' });
+                    if (!response.ok) throw new Error('API returned bad status');
+                    
+                    const data = await response.json();
                     totalEl.textContent = data.total ?? '???';
                     todayEl.textContent = data.today ?? '???';
-                } catch (e) {
-                    // Fallback to local storage
-                    seedIfNeeded();
+                } catch (error) {
+                    // Fallback to localStorage
+                    seedLocalStorageIfNeeded();
                     const total = localStorage.getItem('nft-404-total');
                     const today = localStorage.getItem(getTodayKey());
                     totalEl.textContent = total || '???';
                     todayEl.textContent = today || '???';
                 }
             }
-
+            
             fetchFooterStats();
-
-            // Last login: show previous visit if available; then store now
+            
+            // ==========================================
+            // FOOTER: LAST LOGIN
+            // ==========================================
+            
             const lastLoginEl = document.getElementById('lastLogin');
-            function formatLoginDate(ts) {
-                const date = new Date(ts);
-                const dows = ['sun','mon','tue','wed','thu','fri','sat'];
-                const mons = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
-                const dow = dows[date.getDay()];
-                const mon = mons[date.getMonth()];
+            
+            function formatLoginDate(timestamp) {
+                const date = new Date(timestamp);
+                const daysOfWeek = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+                const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+                
+                const dayOfWeek = daysOfWeek[date.getDay()];
+                const month = months[date.getMonth()];
                 const day = String(date.getDate()).padStart(2, '0');
-                const hh = String(date.getHours()).padStart(2, '0');
-                const mm = String(date.getMinutes()).padStart(2, '0');
-                const ss = String(date.getSeconds()).padStart(2, '0');
-                return `${dow} ${mon} ${day}, ${hh}:${mm}:${ss}`;
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                const seconds = String(date.getSeconds()).padStart(2, '0');
+                
+                return `${dayOfWeek} ${month} ${day}, ${hours}:${minutes}:${seconds}`;
             }
+            
             try {
-                const prevTs = localStorage.getItem('nft-last-login');
-                const nowTs = Date.now();
-                if (prevTs) {
-                    lastLoginEl.textContent = formatLoginDate(Number(prevTs));
+                const previousTimestamp = localStorage.getItem('nft-last-login');
+                const currentTimestamp = Date.now();
+                
+                if (previousTimestamp) {
+                    lastLoginEl.textContent = formatLoginDate(Number(previousTimestamp));
                 } else {
-                    lastLoginEl.textContent = formatLoginDate(nowTs);
+                    lastLoginEl.textContent = formatLoginDate(currentTimestamp);
                 }
-                localStorage.setItem('nft-last-login', String(nowTs));
-            } catch (e) {
-                // If storage fails, at least show current time
+                
+                // Store current timestamp for next visit
+                localStorage.setItem('nft-last-login', String(currentTimestamp));
+            } catch (error) {
+                // If localStorage fails, show current time
                 lastLoginEl.textContent = formatLoginDate(Date.now());
             }
         });

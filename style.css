@@ -377,70 +377,68 @@ body {
     line-height: 1.4;
     text-align: left;
     margin-top: 0 !important;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     padding-top: 0 !important;
 }
 
-.changelog-loading {
-    font-size: 14px;
-    color: var(--fg);
-    opacity: 0.6;
-    font-style: italic;
-}
-
-.changelog-error {
-    font-size: 14px;
-    color: var(--fg);
-}
-
-.changelog-error a {
-    color: var(--fg);
-    text-decoration: underline;
-}
-
 .changelog-list {
-    border-top: 1px solid var(--fg);
-    border-bottom: 1px solid var(--fg);
-    margin-top: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.changelog-item {
-    padding: 16px 0;
-    border-bottom: 1px solid var(--fg);
+.changelog-list li {
+    margin-bottom: 14px;
+    line-height: 1.4em;
 }
 
-.changelog-item:last-child {
-    border-bottom: none;
-}
-
-.changelog-message {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--fg);
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
-    line-height: 1.4;
-}
-
-.changelog-meta {
-    display: flex;
-    gap: 16px;
-    font-size: 12px;
-    opacity: 0.6;
-}
-
-.changelog-date {
-    color: var(--fg);
-}
-
-.changelog-sha a {
+.changelog-list a {
     color: var(--fg);
     text-decoration: none;
-    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    font-weight: 400;
 }
 
-.changelog-sha a:hover {
+.changelog-list a:hover {
     text-decoration: underline;
+}
+
+.changelog-list small {
+    display: block;
+    font-size: 12px;
+    color: var(--fg);
+    opacity: 0.6;
+    margin-top: 4px;
+}
+
+/* ==========================================
+   FLOATING ICON CLICK EFFECT
+   ========================================== */
+
+.floating-icon {
+    position: fixed;
+    font-size: 24px;
+    pointer-events: none;
+    z-index: 9999;
+    user-select: none;
+    animation: float-up 2s ease-out forwards;
+    filter: contrast(1.2) brightness(1.1);
+}
+
+@keyframes float-up {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--drift, 0), -200px) scale(0.5) rotate(15deg);
+    }
 }
 
 /* ==========================================
@@ -680,21 +678,20 @@ body {
     /* Changelog Page */
     .changelog-title {
         font-size: 14px;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
     }
 
-    .changelog-item {
-        padding: 14px 0;
+    .changelog-list li {
+        margin-bottom: 12px;
     }
 
-    .changelog-message {
+    .changelog-list a {
         font-size: 14px;
-        margin-bottom: 6px;
     }
 
-    .changelog-meta {
+    .changelog-list small {
         font-size: 11px;
-        gap: 12px;
+        margin-top: 4px;
     }
 
     /* Footer */

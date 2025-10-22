@@ -357,31 +357,86 @@ body {
 .footer {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    align-items: center;
     max-width: 600px;
     width: 100%;
     margin: 80px auto 0;
     padding-top: 20px;
 }
 
-.footer-text {
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.footer-left,
+.footer-right {
     font-size: 12px;
-    font-weight: 400;
     color: var(--fg);
     opacity: 0.6;
+    font-weight: 400;
 }
 
-.footer-stats {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-}
-
-.footer-stat-item {
-    font-size: 12px;
+/* Table Flipping Animation */
+.table-flip {
+    font-size: 24px;
+    line-height: 1;
     color: var(--fg);
-    opacity: 0.9;
+    opacity: 0.8;
+    flex-shrink: 0;
+}
+
+.table-flip span {
+    display: inline-block;
+}
+
+.flip-arm {
+    animation: flip-arm-move 3s linear infinite;
+    transform-origin: 25% 25%;
+}
+
+.flip-trajectory {
+    animation: flip-trajectory 3s linear infinite;
+}
+
+.flip-table {
+    animation: flip-table-flip 3s linear infinite;
+    transform-origin: -33% 50%;
+}
+
+@keyframes flip-arm-move {
+    from {
+        transform: rotate(90deg);
+    }
+
+    12.5%,
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes flip-trajectory {
+    from {
+        opacity: 0;
+    }
+
+    37.5%,
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes flip-table-flip {
+    from {
+        transform: rotate(-180deg);
+    }
+
+    37.5%,
+    to {
+        transform: rotate(0);
+    }
 }
 
 /* ==========================================

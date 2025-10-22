@@ -33,9 +33,9 @@
                 <div id="home" class="content-section active">
                     <div class="about-content">
                         <div class="about-text">
-                            <p>hello,</p>
-                            <p>i am a product designer on a quest to build things. i'm passionate about creating meaningful experiences and exploring the intersection of technology and creativity. my aim for this website is to treat it as my personal playground, and i expect it to get crazier as i make progress on it. a lot of AI has been used to build this platform.</p>
-                            <p>i am constantly learning, building, and sharing knowledge with the community. on the other two tabs, you'll see things i build and consume — two essentials for any creative: the need to keep building and the need to keep learning. this website will hopefully grow into a collection of everything i love and care for.</p>
+                            <p>hello internet,</p>
+                            <p>i am a product designer on a quest to build things. i'm passionate about creating meaningful experiences and exploring the intersection of technology and creativity. my aim for this website is to treat it as my personal playground, and i expect it to get crazier as i make progress on it.</p>
+                            <p>i am constantly learning, building, and sharing knowledge with the community. on the other two tabs, you'll see things i build and consume. this website will hopefully grow into a collection of everything i love and care for.</p>
                             
                             <p class="contact-section">you can find me here. <a href="mailto:poojasinha.me@gmail.com">Email</a>, <a href="https://x.com/poojasinhaha" target="_blank">X</a>, <a href="https://www.linkedin.com/in/poojasinhaa/" target="_blank">LinkedIn</a></p>
                             
@@ -113,10 +113,12 @@
         
         <!-- Footer -->
         <div class="footer">
-            <div class="footer-text">last login: <span id="lastLogin">…</span></div>
-            <div class="footer-stats" id="footer-stats" aria-live="polite">
-                <div class="footer-stat-item" id="footer-total">404s served: <span id="totalErrors">…</span></div>
-                <div class="footer-stat-item" id="footer-today">today: <span id="todayErrors">…</span></div>
+            <div class="footer-content">
+                <span class="footer-left">copyleft ©2025</span>
+                <div class="table-flip">
+                    (<span class="flip-arm">╯</span>°□°）<span class="flip-arm">╯</span><span class="flip-trajectory">︵</span> <span class="flip-table">┻━┻</span>
+                </div>
+                <span class="footer-right">copyright ©2025</span>
             </div>
         </div>
     </div>
@@ -153,90 +155,6 @@
                     switchToTab(targetTab);
                 });
             });
-            
-            // ==========================================
-            // FOOTER: 404 STATS
-            // ==========================================
-            
-            const totalEl = document.getElementById('totalErrors');
-            const todayEl = document.getElementById('todayErrors');
-            
-            function getTodayKey() {
-                const now = new Date();
-                const year = now.getUTCFullYear();
-                const month = String(now.getUTCMonth() + 1).padStart(2, '0');
-                const day = String(now.getUTCDate()).padStart(2, '0');
-                return `nft-404-day-${year}-${month}-${day}`;
-            }
-            
-            function seedLocalStorageIfNeeded() {
-                if (!localStorage.getItem('nft-404-total')) {
-                    localStorage.setItem('nft-404-total', '42');
-                }
-                const dayKey = getTodayKey();
-                if (!localStorage.getItem(dayKey)) {
-                    localStorage.setItem(dayKey, '0');
-                }
-            }
-            
-            async function fetchFooterStats() {
-                try {
-                    // Attempt to fetch from backend API
-                    const response = await fetch('/api/404-stats', { method: 'GET' });
-                    if (!response.ok) throw new Error('API returned bad status');
-                    
-                    const data = await response.json();
-                    totalEl.textContent = data.total ?? '???';
-                    todayEl.textContent = data.today ?? '???';
-                } catch (error) {
-                    // Fallback to localStorage
-                    seedLocalStorageIfNeeded();
-                    const total = localStorage.getItem('nft-404-total');
-                    const today = localStorage.getItem(getTodayKey());
-                    totalEl.textContent = total || '???';
-                    todayEl.textContent = today || '???';
-                }
-            }
-            
-            fetchFooterStats();
-            
-            // ==========================================
-            // FOOTER: LAST LOGIN
-            // ==========================================
-            
-            const lastLoginEl = document.getElementById('lastLogin');
-            
-            function formatLoginDate(timestamp) {
-                const date = new Date(timestamp);
-                const daysOfWeek = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-                const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-                
-                const dayOfWeek = daysOfWeek[date.getDay()];
-                const month = months[date.getMonth()];
-                const day = String(date.getDate()).padStart(2, '0');
-                const hours = String(date.getHours()).padStart(2, '0');
-                const minutes = String(date.getMinutes()).padStart(2, '0');
-                const seconds = String(date.getSeconds()).padStart(2, '0');
-                
-                return `${dayOfWeek} ${month} ${day}, ${hours}:${minutes}:${seconds}`;
-            }
-            
-            try {
-                const previousTimestamp = localStorage.getItem('nft-last-login');
-                const currentTimestamp = Date.now();
-                
-                if (previousTimestamp) {
-                    lastLoginEl.textContent = formatLoginDate(Number(previousTimestamp));
-                } else {
-                    lastLoginEl.textContent = formatLoginDate(currentTimestamp);
-                }
-                
-                // Store current timestamp for next visit
-                localStorage.setItem('nft-last-login', String(currentTimestamp));
-            } catch (error) {
-                // If localStorage fails, show current time
-                lastLoginEl.textContent = formatLoginDate(Date.now());
-            }
         });
     </script>
 </body>

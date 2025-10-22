@@ -338,12 +338,56 @@ body.theme-about {
     font-weight: 400;
 }
 
+.contact-section {
+    margin-top: 30px;
+}
+
+.contact-section a {
+    color: var(--fg);
+    text-decoration: underline;
+    font-weight: 400;
+}
+
+.blog-section {
+    margin-top: 30px;
+}
+
+.blog-title {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.blog-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.blog-list li {
+    font-size: 14px;
+    color: var(--fg);
+    margin-bottom: 8px;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.blog-list li a {
+    color: var(--fg);
+    text-decoration: underline;
+    font-weight: 400;
+}
+
 .footer {
     margin-top: 80px;
     padding-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 .footer-text {

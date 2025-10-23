@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Non Fungible Talent</title>
     
+    <!-- Meta Tags for SEO and Social Sharing -->
+    <meta name="description" content="Product designer on a quest to build things. Building in public, documenting what I create and consume.">
+    <meta name="author" content="Pooja Sinha">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nonfungibletalent.com/">
+    <meta property="og:title" content="Non Fungible Talent">
+    <meta property="og:description" content="Product designer on a quest to build things. Building in public, documenting what I create and consume.">
+    <meta property="og:image" content="https://nonfungibletalent.com/og-image.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://nonfungibletalent.com/">
+    <meta property="twitter:title" content="Non Fungible Talent">
+    <meta property="twitter:description" content="Product designer on a quest to build things. Building in public, documenting what I create and consume.">
+    <meta property="twitter:image" content="https://nonfungibletalent.com/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -276,8 +300,14 @@
             // PIXELATED ICON CLICK EFFECT
             // ==========================================
             
-            // Collection of pixelated emoji/icons
-            const pixelIcons = ['⭐', '✨', '💫', '🌟', '💖', '💝', '🎨', '🎯', '🚀', '✏️', '📌', '💡', '🔥', '⚡', '🌈', '🎪', '🎭', '🎨', '🎸', '🎹'];
+            // Collection of pixelated SVG icons
+            const pixelIcons = [
+                'pixelated icons/coin.svg',
+                'pixelated icons/mountain.svg',
+                'pixelated icons/pet-animals-rabbit-2.svg',
+                'pixelated icons/rocket.svg',
+                'pixelated icons/school-science-test-flask.svg'
+            ];
             
             document.addEventListener('click', function(e) {
                 // Don't create icons when clicking on links or buttons
@@ -290,12 +320,13 @@
             
             function createFloatingIcon(x, y) {
                 // Create the icon element
-                const icon = document.createElement('div');
+                const icon = document.createElement('img');
                 icon.className = 'floating-icon';
                 
                 // Random icon from collection
                 const randomIcon = pixelIcons[Math.floor(Math.random() * pixelIcons.length)];
-                icon.textContent = randomIcon;
+                icon.src = randomIcon;
+                icon.alt = 'floating icon';
                 
                 // Position at click location
                 icon.style.left = x + 'px';

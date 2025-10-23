@@ -458,12 +458,12 @@ body {
 
 .floating-icon {
     position: fixed;
-    font-size: 24px;
+    width: 32px;
+    height: 32px;
     pointer-events: none;
     z-index: 9999;
     user-select: none;
     animation: float-up 2s ease-out forwards;
-    filter: contrast(1.2) brightness(1.1);
 }
 
 @keyframes float-up {

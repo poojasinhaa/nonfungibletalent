@@ -742,7 +742,7 @@ body {
     .footer-left {
         display: none;
     }
-    
+
     .footer-right {
         font-size: 11px;
     }
@@ -835,7 +835,10 @@ body {
         font-size: 18px;
     }
 
-    .footer-left,
+    .footer-left {
+        display: none;
+    }
+
     .footer-right {
         font-size: 10px;
     }

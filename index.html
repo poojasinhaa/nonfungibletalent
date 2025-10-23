@@ -217,13 +217,14 @@
                 const commitList = document.getElementById("commit-list");
                 
                 try {
-                    // Use GitHub API with proper headers
+                    // Use GitHub API with proper headers and cache busting
                     const res = await fetch("https://api.github.com/repos/poojasinhaa/nonfungibletalent/commits?per_page=10", {
                         method: 'GET',
                         headers: {
                             'Accept': 'application/vnd.github.v3+json',
                             'Content-Type': 'application/json'
-                        }
+                        },
+                        cache: 'no-store'
                     });
                     
                     if (!res.ok) {
@@ -246,7 +247,7 @@
                         list += `
                             <li>
                                 <a href="${c.html_url}" target="_blank">${escapeHtml(message)}</a>
-                                <small>by ${escapeHtml(c.commit.author.name)} · ${formattedDate} at ${timestamp}</small>
+                                <small>${formattedDate} at ${timestamp}</small>
                             </li>
                         `;
                     });
@@ -285,11 +286,11 @@
                 return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
             }
             
-            // Helper function to format timestamp
+            // Helper function to format timestamp (in UTC)
             function formatTimestamp(date) {
-                const hours = String(date.getHours()).padStart(2, '0');
-                const minutes = String(date.getMinutes()).padStart(2, '0');
-                return `${hours}:${minutes}`;
+                const hours = String(date.getUTCHours()).padStart(2, '0');
+                const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+                return `${hours}:${minutes} UTC`;
             }
             
             // Load changelog immediately on page load
